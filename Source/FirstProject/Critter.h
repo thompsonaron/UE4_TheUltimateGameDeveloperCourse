@@ -30,7 +30,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* MeshComponent;
+	UStaticMeshComponent* MeshinjoComponent;
 
 	// forward declaration example
 	// class UStaticMeshComponent* MeshComponent;
@@ -38,7 +38,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* Camera;
 	
-	UPROPERTY(EditAnywhere, "Pawn Movement")
+	UPROPERTY(EditAnywhere, Category = "Pawn Movement")
 	float MaxSpeed;
 
 private:

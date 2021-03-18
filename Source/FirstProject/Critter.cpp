@@ -10,11 +10,11 @@ ACritter::ACritter()
 	PrimaryActorTick.bCanEverTick = true;
 
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RoottttttComponent"));
+	MeshinjoComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 
 	// Postavljam root svog objekta? Mislim da ne. Mislim da spajam za root komponentu
-	MeshComponent->SetupAttachment(GetRootComponent());
+	MeshinjoComponent->SetupAttachment(GetRootComponent());
 	// Ovo bi trebalo biti za postavljanje root komponente
 	//SetRootComponent(MeshComponent);
 
