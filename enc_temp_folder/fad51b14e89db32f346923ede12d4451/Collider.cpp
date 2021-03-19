@@ -55,7 +55,7 @@ ACollider::ACollider()
 	CameraInput = FVector2D(0.f, 0.f);
 
 	// this will posses player and take input from/as a Player0?
-	AutoPossessPlayer = EAutoReceiveInput::Player0;
+	//AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
 // Called when the game starts or when spawned
@@ -75,7 +75,7 @@ void ACollider::Tick(float DeltaTime)
 	SetActorRotation(NewRotation);
 
 	FRotator NewSpringArmRotation = SpringArmComponent->GetComponentRotation();
-	NewSpringArmRotation.Pitch = FMath::Clamp(NewSpringArmRotation.Pitch += CameraInput.Y, -80.f, -15.f);
+	NewSpringArmRotation.Pitch += CameraInput.Y;
 
 	SpringArmComponent->SetWorldRotation(NewSpringArmRotation);
 }
@@ -119,11 +119,11 @@ void ACollider::MoveRight(float InputValue)
 
 void ACollider::CameraPitch(float AxisValue) 
 {
-	CameraInput.Y = AxisValue;
+	CameraInput.X = AxisValue;
 }
 
 void ACollider::CameraYaw(float AxisValue)
 {
-	CameraInput.X = AxisValue;
+	CameraInput.Y = AxisValue;
 }
 

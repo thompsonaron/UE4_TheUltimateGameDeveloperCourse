@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-//#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Critter.generated.h"
@@ -30,7 +30,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* MeshinjoComponent;
+	USkeletalMeshComponent* MeshinjoComponent;
 
 	// forward declaration example
 	// class UStaticMeshComponent* MeshComponent;

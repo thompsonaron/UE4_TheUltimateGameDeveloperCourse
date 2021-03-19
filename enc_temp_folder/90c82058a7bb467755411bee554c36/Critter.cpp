@@ -24,7 +24,7 @@ ACritter::ACritter()
 	Camera->SetRelativeRotation(FRotator(-45.f, 0.f, 0.f));
 
 	// allows us to posses default pawn
-	//AutoPossessPlayer = EAutoReceiveInput::Player0;
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
 	CurrentVelocity = FVector(0.f);
 	MaxSpeed = 100.f;
