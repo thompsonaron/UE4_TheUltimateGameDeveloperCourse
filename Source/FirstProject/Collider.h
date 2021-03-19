@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ColliderMovementComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Components/SphereComponent.h"
 #include "Components/InputComponent.h"
@@ -43,6 +44,12 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	class USpringArmComponent* SpringArmComponent;
+
+	UPROPERTY(VisibleAnywhere, Category = "Movement")
+	class UColliderMovementComponent* OurMovementComponent;
+
+	virtual UPawnMovementComponent* GetMovementComponent() const override;
+
 
 	// FORCEINLINE will make this method pasted everywhere where it is called on compile
 	FORCEINLINE UStaticMeshComponent* GetMeshComponent() { return MeshComponent; }

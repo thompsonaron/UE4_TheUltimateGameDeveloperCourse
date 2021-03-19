@@ -12,10 +12,12 @@ ACollider::ACollider()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	// going to use SphereComponent as a root instead
+	//RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
 	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
-	SphereComponent->SetupAttachment(GetRootComponent());
+	SetRootComponent(SphereComponent);
+	//SphereComponent->SetupAttachment(GetRootComponent());
 	SphereComponent->InitSphereRadius(40.f);
 	SphereComponent->SetCollisionProfileName(TEXT("Pawn"));
 
@@ -46,6 +48,10 @@ ACollider::ACollider()
 	// this will attach it to the SpringArmComponent and something something socket
 	CameraComponent->SetupAttachment(SpringArmComponent, USpringArmComponent::SocketName);
 
+	OurMovementComponent = CreateDefaultSubobject<UColliderMovementComponent>(TEXT("OurMovementComponent"));
+	// this basically decides which component will it update - which component will have its position updated (and we call that... movement :D)
+	OurMovementComponent->UpdatedComponent = SphereComponent;
+
 	// this will posses player and take input from/as a Player0?
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
@@ -73,15 +79,38 @@ void ACollider::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ACollider::MoveRight);
 }
 
+UPawnMovementComponent* ACollider::GetMovementComponent() const
+{
+	return OurMovementComponent;
+}
+
 void ACollider::MoveForward(float InputValue)
 {
 	FVector Forward = GetActorForwardVector();
-	AddMovementInput(Forward * InputValue);
+
+	if (OurMovementComponent)
+	{
+		OurMovementComponent->AddInputVector(Forward * InputValue);
+	}
 }
 
 void ACollider::MoveRight(float InputValue)
 {
 	FVector Right = GetActorRightVector();
-	AddMovementInput(Right* InputValue);
+
+	if (OurMovementComponent)
+	{
+		OurMovementComponent->AddInputVector(Right * InputValue);
+	}
 }
+
+//void ACollider::YawCamera(float AxisValue) 
+//{
+//	CameraInput.X = AxisValue;
+//}
+//
+//void ACollider::PitchCamera(float AxisValue)
+//{
+//	CameraInput.Y = AxisValue;
+//}
 
